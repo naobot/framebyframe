@@ -2,6 +2,7 @@
 import Social from "./Social.astro";
 import logoFull from '../assets/logo-full.png';
 import logoMark from '../assets/logo-mark.png';
+import Navigation from "./Navigation.astro";
 ---
 
 <header id="site-header">
@@ -11,12 +12,7 @@ import logoMark from '../assets/logo-mark.png';
       <img id="logo-mark" src={logoMark.src} alt="Frame by Frame Homepage" aria-hidden="true" />
     </a>
 
-    <nav class="nav-popover">
-      <a href="/work">Work</a>
-      <a href="/about">About</a>
-      <a href="/writing">Writing</a>
-      <a href="/contact">Contact</a>
-    </nav>
+    <Navigation />
   </div>
   <section id="links">
     <div class="social-icons">
@@ -77,7 +73,7 @@ import logoMark from '../assets/logo-mark.png';
     }
   }
 
-  .nav-popover {
+/*  .nav-popover {
     position: absolute;
     top: 100%;
     padding-top: 8px;
@@ -95,7 +91,7 @@ import logoMark from '../assets/logo-mark.png';
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
-  }
+  }*/
 
   .social-icons {
     display: flex;

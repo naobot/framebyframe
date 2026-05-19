@@ -77,7 +77,7 @@
       ]
     },
     {
-      "path": "src/data/navigation.yml",
+      "path": "src/data/navigation.json",
       "label": "Navigation",
       "fields": [
         {
