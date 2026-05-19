@@ -1,0 +1,85 @@
+{
+  "base_url": "http://localhost:4321/",
+  "assets_path": "public/assets/uploads",
+  "data_path": "src/data",
+  "collections": [
+    {
+      "name": "issues",
+      "label": "Issues",
+      "path": "src/content/issues",
+      "orderable": true,
+      "publishable": true,
+      "fields": [
+        { "name": "title", "label": "Title", "type": "text", "required": true },
+        { "name": "publish_date", "label": "Publish Date", "type": "date", "required": false },
+        { "name": "cover", "label": "Cover Photo", "type": "image", "required": false },
+        { "name": "photos", "label": "Additional Photos", "type": "image-list", "required": false },
+        { "name": "sample_pages", "label": "Sample Pages", "type": "image-list", "required": false },
+        { "name": "buy_link", "label": "Buy Link", "type": "text", "required": false },
+        { "name": "description", "label": "Description", "type": "rich-text", "required": false }
+      ]
+    },
+    {
+      "name": "news",
+      "label": "News",
+      "path": "src/content/news",
+      "orderable": true,
+      "publishable": false,
+      "fields": [
+        { "name": "heading", "label": "Heading", "type": "text", "required": true },
+        { "name": "year", "label": "Year", "type": "text", "required": true },
+        { "name": "month", "label": "Month", "type": "text", "required": true },
+        { "name": "day", "label": "Day", "type": "text", "required": false },
+        { "name": "photos", "label": "Photos", "type": "image-list", "required": false },
+        { "name": "link", "label": "Link", "type": "text", "required": false },
+        { "name": "description", "label": "Description", "type": "textarea", "required": false }
+      ]
+    }
+  ],
+  "singletons": [
+    {
+      "name": "about",
+      "label": "About",
+      "path": "src/content/about.md",
+      "fields": [
+        { "name": "title", "label": "Title", "type": "text", "required": true },
+        { "name": "body", "label": "Content", "type": "rich-text", "required": false }
+      ]
+    },
+    {
+      "name": "contact",
+      "label": "Contact",
+      "path": "src/content/contact.md",
+      "fields": [
+        { "name": "title", "label": "Title", "type": "text", "required": true },
+        { "name": "body", "label": "Content", "type": "rich-text", "required": false }
+      ]
+    },
+    {
+      "name": "contributions",
+      "label": "Contributions",
+      "path": "src/content/contributions.md",
+      "fields": [
+        { "name": "title", "label": "Title", "type": "text", "required": true },
+        { "name": "body", "label": "Content", "type": "rich-text", "required": false }
+      ]
+    }
+  ],
+  "data_files": [
+    {
+      "path": "src/data/navigation.yml",
+      "label": "Navigation",
+      "fields": [
+        {
+          "name": "items",
+          "label": "Navigation Items",
+          "type": "list-of-objects",
+          "fields": [
+            { "name": "name", "label": "Name", "type": "text", "required": true },
+            { "name": "link", "label": "Link", "type": "text", "required": true }
+          ]
+        }
+      ]
+    }
+  ]
+}
