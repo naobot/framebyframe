@@ -1,0 +1,11 @@
+items:
+  - name: "Issues"
+    link: "/issues"
+  - name: "News"
+    link: "/news"
+  - name: "About"
+    link: "/about"
+  - name: "Contact"
+    link: "/contact"
+  - name: "Contributions"
+    link: "/contributions"
