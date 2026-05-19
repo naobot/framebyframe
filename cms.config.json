@@ -38,17 +38,6 @@
   ],
   "singletons": [
     {
-      "name": "about",
-      "label": "About",
-      "path": "src/content/about.md",
-      "fields": [
-        { "name": "title", "label": "Title", "type": "text", "required": true },
-        { "name": "subtitle", "label": "Subtitle", "type": "text", "required": false },
-        { "name": "body", "label": "Content JP", "type": "rich-text", "required": false }
-        { "name": "body", "label": "Content EN", "type": "rich-text", "required": false }
-      ]
-    },
-    {
       "name": "contact",
       "label": "Contact",
       "path": "src/content/contact.md",
@@ -68,6 +57,25 @@
     }
   ],
   "data_files": [
+    {
+      "path": "src/data/about.json",
+      "label": "About",
+      "fields": [
+        {
+          "name": "sections",
+          "label": "Sections",
+          "type": "list-of-objects",
+          "fields": [
+            { "name": "heading", "label": "Heading", "type": "text", "required": false },
+            { "name": "subheading", "label": "Subheading", "type": "text", "required": false },
+            { "name": "text", "label": "Text", "type": "rich-text", "required": false },
+            { "name": "heading_en", "label": "Heading (EN)", "type": "text", "required": false },
+            { "name": "subheading_en", "label": "Subheading (EN)", "type": "text", "required": false },
+            { "name": "text_en", "label": "Text (EN)", "type": "rich-text", "required": false }
+          ]
+        }
+      ]
+    },
     {
       "path": "src/data/navigation.yml",
       "label": "Navigation",
