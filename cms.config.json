@@ -43,7 +43,9 @@
       "path": "src/content/about.md",
       "fields": [
         { "name": "title", "label": "Title", "type": "text", "required": true },
-        { "name": "body", "label": "Content", "type": "rich-text", "required": false }
+        { "name": "subtitle", "label": "Subtitle", "type": "text", "required": false },
+        { "name": "body", "label": "Content JP", "type": "rich-text", "required": false }
+        { "name": "body", "label": "Content EN", "type": "rich-text", "required": false }
       ]
     },
     {
