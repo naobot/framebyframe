@@ -1,0 +1,100 @@
+---
+import Social from "./Social.astro";
+import logoFull from '../assets/logo-full.png';
+---
+
+<header id="site-header">
+  <div class="logo-wrap">
+    <a href="/">
+      <img src={logoFull.src} alt="Frame by Frame Homepage" />
+    </a>
+
+    <nav class="nav-popover">
+      <a href="/work">Work</a>
+      <a href="/about">About</a>
+      <a href="/writing">Writing</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+  <section id="links">
+    <div class="social-icons">
+      <Social title="instagram" url="https://www.instagram.com/fbf_komaokuri" />
+      <Social title="bsky" url="https://bsky.app/profile/komaokurifbf.bsky.social" />
+      <Social title="twitter" url="https://x.com/fbf_komaokuri?s=21" />
+    </div>
+  </section>
+</header>
+
+<style>
+  #site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    height: 120px;
+    transition: height 0.3s ease;
+  }
+
+  #site-header.scrolled {
+    height: 80px;
+
+    a, .logo-wrap {
+      height: calc(100% - 12px);
+    }
+  }
+
+  .logo-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    height: calc(100% - 12px);
+    transition: height 0.3s ease;
+
+    a, img {
+      height: 100%;
+      width: auto;
+      display: block;
+    }
+  }
+
+  .nav-popover {
+    position: absolute;
+    top: 100%;
+    padding-top: 8px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-4px);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+  }
+
+  .logo-wrap:hover .nav-popover,
+  .logo-wrap:focus-within .nav-popover {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .social-icons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+</style>
+
+<script>
+  const header = document.getElementById('site-header');
+  if (header) {
+    const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 16);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>
