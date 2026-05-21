@@ -1,6 +1,6 @@
 ---
-title: "Vol. 01"
-published: false
+title: Vol. 01
+published: true
 ---
 
 Vol 01
