@@ -1,18 +1,17 @@
 ---
-import heroImage from '../assets/IMG_9356.jpg';
-
 interface Props {
   heading: string;
   description: string;
   ctaHref: string;
+  cover: string;
 }
 
-const { heading, description, ctaHref } = Astro.props;
+const { heading, description, cover, ctaHref } = Astro.props;
 ---
 
 <section id="hero">
   <div class="image-side">
-    <img src={heroImage.src} alt="" />
+    <img src={cover} alt="" />
   </div>
 
   <div class="text-side">

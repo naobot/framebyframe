@@ -1,14 +1,20 @@
 ---
 import Hero from './Hero.astro';
 import News from './News.astro';
+import { getCollection } from 'astro:content';
+
+console.log("hello")
+const issues = await getCollection('issues', ({ data }) => data.published !== false);
+const latestIssue = issues.at(-1);
+console.log(issues);
 ---
 
 <div id="container">
-  <!-- <img id="background" src={background.src} alt="" fetchpriority="high" /> -->
   <main>
     <Hero
-      heading="vol. 2"
-      description="Your description here."
+      heading={latestIssue?.data.title}
+      description={latestIssue?.data.description}
+      cover={latestIssue?.data.cover}
       ctaHref="/issues"
     />
     <News />
