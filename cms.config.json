@@ -84,7 +84,7 @@
       "fields": [
         {
           "name": "items",
-          "label": "Navigation Items",
+          "label": "News Items",
           "type": "list-of-objects",
           "fields": [
             { "name": "title", "label": "Heading", "type": "text", "required": true },
