@@ -2,8 +2,34 @@
   "items": [
     {
       "heading": "Placeholder News",
+      "year": "2026",
+      "month": "04",
+      "title": "Vol.2の情報を公開しました。",
+      "day": "19"
+    },
+    {
+      "title": "オンラインストアを公開しました。",
+      "month": "09",
+      "day": "09",
+      "year": "2025"
+    },
+    {
+      "title": "Vol.1の情報を公開しました。",
       "year": "2025",
-      "month": "01"
+      "month": "08",
+      "day": "28"
+    },
+    {
+      "title": "各種SNSアカウントを開設しました",
+      "year": "2025",
+      "month": "05",
+      "day": "18"
+    },
+    {
+      "title": "HPを公開しました",
+      "year": "2025",
+      "month": "05",
+      "day": "18"
     }
   ]
 }
