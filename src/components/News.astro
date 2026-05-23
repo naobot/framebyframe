@@ -1,4 +1,6 @@
 ---
+import newsData from '../data/news.json';
+const { items } = newsData;
 ---
 
 <section id="news">
@@ -7,7 +9,23 @@
   </div>
 
   <div>
-    newss stufff heree
+    {items.map((newsItem) => {
+      const formattedDate = (() => {
+        const date: string[] = []
+
+        newsItem.year && date.push(newsItem.year)
+        newsItem.month && date.push(newsItem.month)
+        newsItem.day && date.push(newsItem.day)
+
+        return date.join('.')
+      })()
+
+      return (
+        <div>
+          {formattedDate} {newsItem.title}
+        </div>
+      )
+    })}
   </div>
 </section>
 

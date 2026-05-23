@@ -27,7 +27,7 @@
       "path": "src/content/contact.md",
       "fields": [
         { "name": "title", "label": "Title", "type": "text", "required": true },
-        { "name": "body", "label": "Content", "type": "rich-text", "required": false }
+        { "name": "subtitle", "label": "Subtitle", "type": "text", "required": false }
       ]
     },
     {
@@ -36,7 +36,16 @@
       "path": "src/content/contributions.md",
       "fields": [
         { "name": "title", "label": "Title", "type": "text", "required": true },
-        { "name": "body", "label": "Content", "type": "rich-text", "required": false }
+        { "name": "subtitle", "label": "Subtitle", "type": "text", "required": false }
+      ]
+    },
+    {
+      "name": "shops",
+      "label": "Shop List",
+      "path": "src/content/shops.md",
+      "fields": [
+        { "name": "title", "label": "Title", "type": "text", "required": true },
+        { "name": "subtitle", "label": "Subtitle", "type": "text", "required": false }
       ]
     }
   ],
@@ -79,8 +88,6 @@
       "name": "news",
       "label": "News",
       "path": "src/data/news.json",
-      "orderable": true,
-      "publishable": false,
       "fields": [
         {
           "name": "items",
