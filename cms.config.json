@@ -18,22 +18,6 @@
         { "name": "buy_link", "label": "Buy Link", "type": "text", "required": false },
         { "name": "description", "label": "Description", "type": "rich-text", "required": false }
       ]
-    },
-    {
-      "name": "news",
-      "label": "News",
-      "path": "src/content/news",
-      "orderable": true,
-      "publishable": false,
-      "fields": [
-        { "name": "title", "label": "Heading", "type": "text", "required": true },
-        { "name": "year", "label": "Year", "type": "text", "required": true },
-        { "name": "month", "label": "Month", "type": "text", "required": true },
-        { "name": "day", "label": "Day", "type": "text", "required": false },
-        { "name": "photos", "label": "Photos", "type": "image-list", "required": false },
-        { "name": "link", "label": "Link", "type": "text", "required": false },
-        { "name": "description", "label": "Description", "type": "textarea", "required": false }
-      ]
     }
   ],
   "singletons": [
@@ -89,6 +73,22 @@
             { "name": "link", "label": "Link", "type": "text", "required": true }
           ]
         }
+      ]
+    },
+    {
+      "name": "news",
+      "label": "News",
+      "path": "src/data/news.json",
+      "orderable": true,
+      "publishable": false,
+      "fields": [
+        { "name": "title", "label": "Heading", "type": "text", "required": true },
+        { "name": "year", "label": "Year", "type": "text", "required": true },
+        { "name": "month", "label": "Month", "type": "text", "required": true },
+        { "name": "day", "label": "Day", "type": "text", "required": false },
+        { "name": "photos", "label": "Photos", "type": "image-list", "required": false },
+        { "name": "link", "label": "Link", "type": "text", "required": false },
+        { "name": "description", "label": "Description", "type": "textarea", "required": false }
       ]
     }
   ]
