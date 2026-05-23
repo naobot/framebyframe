@@ -26,7 +26,7 @@
       "orderable": true,
       "publishable": false,
       "fields": [
-        { "name": "heading", "label": "Heading", "type": "text", "required": true },
+        { "name": "title", "label": "Heading", "type": "text", "required": true },
         { "name": "year", "label": "Year", "type": "text", "required": true },
         { "name": "month", "label": "Month", "type": "text", "required": true },
         { "name": "day", "label": "Day", "type": "text", "required": false },
