@@ -3,20 +3,17 @@ import Hero from './Hero.astro';
 import News from './News.astro';
 import { getCollection } from 'astro:content';
 
-console.log("hello")
 const issues = await getCollection('issues', ({ data }) => data.published !== false);
 const latestIssue = issues.at(-1);
 console.log(issues);
 ---
 
-<div id="container">
-  <main>
-    <Hero
-      heading={latestIssue?.data.title}
-      description={latestIssue?.data.description}
-      cover={latestIssue?.data.cover}
-      ctaHref="/issues"
-    />
-    <News />
-  </main>
-</div>
+<Fragment>
+  <Hero
+    heading={latestIssue?.data.title}
+    description={latestIssue?.data.description}
+    cover={latestIssue?.data.cover}
+    ctaHref="/issues"
+  />
+  <News />
+</Fragment>

@@ -1,0 +1,9 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const { default: Content, frontmatter } = await import('../content/contributions.md');
+---
+
+<Layout title={frontmatter.title}>
+  <Content />
+</Layout>
