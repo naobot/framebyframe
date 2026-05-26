@@ -12,20 +12,34 @@ import navData from '../data/navigation.json';
   :global(.nav-popover) {
     position: absolute;
     top: 100%;
-    padding-top: 8px;
+    padding: 16px;
+    width: 180px;
     left: 0;
     display: flex;
     flex-direction: column;
+    gap: 8px;
     opacity: 0;
     pointer-events: none;
     transform: translateY(-4px);
     transition: opacity 0.28s ease, transform 0.28s ease;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 3px;
   }
 
   :global(.logo-wrap:hover .nav-popover),
   :global(.logo-wrap:focus-within .nav-popover) {
     opacity: 1;
+    background: rgba(255, 255, 255, 0.8);
+    transition: background 0.5s ease;
     pointer-events: auto;
     transform: translateY(0);
+  }
+
+  :global(.logo-wrap:hover .nav-popover:hover) {
+    background: rgba(255, 255, 255, 1);
+  }
+
+  :global(.logo-wrap:hover .nav-popover a:hover) {
+    font-weight: 800;
   }
 </style>
