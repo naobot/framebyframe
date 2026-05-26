@@ -1,9 +1,12 @@
 ---
+import PageContent from '../../components/PageContent.astro';
 import Layout from '../../layouts/Layout.astro';
 
 const { default: Content, frontmatter } = await import('../../content/contact.md');
 ---
 
-<Layout title={frontmatter.title}>
-  <Content />
+<Layout>
+  <PageContent title={frontmatter.title}>
+    <Content slot="content" />
+  </PageContent>
 </Layout>
