@@ -18,7 +18,7 @@ const { heading, description, cover, ctaHref } = Astro.props;
     <div class="text-content">
       <h1>{heading}</h1>
       <p>{description}</p>
-      <a href={ctaHref} class="cta">More issues</a>
+      <a href={ctaHref} class="cta">→ More issues</a>
     </div>
   </div>
 </section>
@@ -52,7 +52,7 @@ const { heading, description, cover, ctaHref } = Astro.props;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    padding: 2rem;
+    padding: 1rem;
     /* overlap the diagonal edge so no gap shows */
     margin-left: -8%;
   }
@@ -63,5 +63,19 @@ const { heading, description, cover, ctaHref } = Astro.props;
     align-items: flex-end;
     text-align: right;
     max-width: 320px;
+
+    h1 {
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .cta {
+      color: #000;
+      padding: 8px;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
   }
 </style>

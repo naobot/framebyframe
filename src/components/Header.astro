@@ -3,14 +3,22 @@ import Social from "./Social.astro";
 import logoFull from '../assets/logo-full.png';
 import logoMark from '../assets/logo-mark.png';
 import Navigation from "./Navigation.astro";
+import Hanko from "./Hanko.astro";
 ---
 
 <header id="site-header">
   <div class="logo-wrap">
-    <a href="/">
-      <img id="logo-full" src={logoFull.src} alt="Frame by Frame Homepage" />
-      <img id="logo-mark" src={logoMark.src} alt="Frame by Frame Homepage" aria-hidden="true" />
-    </a>
+    <div class="logo-item">
+      <a href="/">
+        <img id="logo-full" src={logoFull.src} alt="Frame by Frame Homepage" />
+        <img id="logo-mark" src={logoMark.src} alt="Frame by Frame Homepage" aria-hidden="true" />
+      </a>
+    </div>
+    <div id="hanko-wrapper" class="logo-item">
+      <a href="/">
+        <Hanko />
+      </a>
+    </div>
 
     <Navigation />
   </div>
@@ -66,10 +74,22 @@ import Navigation from "./Navigation.astro";
     height: calc(100% - 12px);
     transition: height 0.3s ease;
 
-    a, img {
+    > div, a, img {
       height: 100%;
       width: auto;
       display: block;
+    }
+
+    #hanko-wrapper a {
+      height: auto;
+      margin: 1rem;
+    }
+
+    .logo-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      align-content: center;
     }
   }
 
