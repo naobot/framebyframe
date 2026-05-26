@@ -21,8 +21,10 @@ const { items } = newsData;
       })()
 
       return (
-        <div>
-          {formattedDate} {newsItem.title}
+        <div class="news-row">
+          <span>{formattedDate}</span>
+          <span class="dots"></span>
+          <span>{newsItem.title}</span>
         </div>
       )
     })}
@@ -34,7 +36,17 @@ const { items } = newsData;
     display: flex;
     flex-direction: column;
     padding: 1rem 2rem;
+
+    .news-row {
+      display: flex;
+      align-items: baseline;
+      margin: 1rem 0;
+    }
+
+    .dots {
+      flex-grow: 1;
+      border-bottom: 2px dotted #000;
+      margin: 0 10px;
+    }
   }
-
-
 </style>
