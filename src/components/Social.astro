@@ -1,4 +1,9 @@
 ---
 const { title, url } = Astro.props;
 ---
-<a href={url}>{title}</a>
+
+<div class="social-icons__icon-wrapper">
+  <a href={url}>
+    <img src={`/assets/icon_${title}.svg`}>
+  </a>
+</div>
