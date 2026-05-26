@@ -16,6 +16,9 @@ const { heading, description, cover, ctaHref } = Astro.props;
 
   <div class="text-side">
     <div class="text-content">
+      <h2>
+        アニメ業界発、フェミニストとクィア当事者のアニメ業界人たちによる社会のことを考えるZINE
+      </h2>
       <h1>{heading}</h1>
       <p>{description}</p>
       <a href={ctaHref} class="cta">→ More issues</a>
@@ -52,7 +55,7 @@ const { heading, description, cover, ctaHref } = Astro.props;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    padding: 1rem;
+    padding: 1rem 2rem;
     /* overlap the diagonal edge so no gap shows */
     margin-left: -8%;
   }
@@ -64,9 +67,23 @@ const { heading, description, cover, ctaHref } = Astro.props;
     text-align: right;
     max-width: 320px;
 
+    h1, h2 {
+      padding-left: 2rem;
+      z-index: 5;
+    }
+
     h1 {
       line-height: 1;
       font-weight: 800;
+    }
+
+    h2 {
+      line-height: 1;
+      color: #3e3e3e;
+      font-weight: 200;
+      font-size: 0.9rem;
+      writing-mode: vertical-rl;
+      max-height: 40vh;
     }
 
     .cta {
