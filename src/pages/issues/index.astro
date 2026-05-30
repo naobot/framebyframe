@@ -1,0 +1,50 @@
+---
+import PageContent from '../../components/PageContent.astro';
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const issues = await getCollection('issues', ({ data }) => data.published !== false);
+const sorted = issues.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+---
+
+<Layout title="Issues">
+  <PageContent title="Issues">
+    <main>
+      <ul class="issues-list">
+        {sorted.map((issue) => (
+          <li class="issue-item">
+            <a href={`/issues/${issue.slug}`}>
+              {issue.data.cover && (
+                <img src={issue.data.cover} alt={issue.data.title} />
+              )}
+              <h2>{issue.data.title}</h2>
+              {issue.data.description && (
+                <p>{issue.data.description}</p>
+              )}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </main>
+  </PageContent>
+</Layout>
+
+<style>
+  .issues-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .issue-item a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .issue-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>
