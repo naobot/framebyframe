@@ -1,26 +1,31 @@
 ---
 import PageContent from '../../components/PageContent.astro';
 import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 const issues = await getCollection('issues', ({ data }) => data.published !== false);
 const sorted = issues.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+
+const issuesWithContent = await Promise.all(
+  sorted.map(async (issue) => {
+    const { Content } = await render(issue);
+    return { issue, Content };
+  })
+);
 ---
 
 <Layout title="Issues">
   <PageContent title="Issues">
     <main>
       <ul class="issues-list">
-        {sorted.map((issue) => (
+        {issuesWithContent.map(({ issue, Content }) => (
           <li class="issue-item">
             <a href={`/issues/${issue.slug}`}>
               {issue.data.cover && (
                 <img src={issue.data.cover} alt={issue.data.title} />
               )}
               <h2>{issue.data.title}</h2>
-              {issue.data.description && (
-                <p>{issue.data.description}</p>
-              )}
+              <Content />
             </a>
           </li>
         ))}
