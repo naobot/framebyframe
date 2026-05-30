@@ -1,10 +1,9 @@
 ---
-import PageContent from '../../components/PageContent.astro';
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
 
 const issues = await getCollection('issues', ({ data }) => data.published !== false);
-const sorted = issues.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const sorted = issues.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)).reverse();
 
 const issuesWithContent = await Promise.all(
   sorted.map(async (issue) => {
@@ -15,30 +14,113 @@ const issuesWithContent = await Promise.all(
 ---
 
 <Layout title="Issues">
-  <PageContent title="Issues">
-    <main>
-      <ul class="issues-list">
-        {issuesWithContent.map(({ issue, Content }) => (
-          <li class="issue-item">
-            <a href={`/issues/${issue.slug}`}>
-              {issue.data.cover && (
-                <img src={issue.data.cover} alt={issue.data.title} />
-              )}
-              <h2>{issue.data.title}</h2>
-              <Content />
-            </a>
-          </li>
-        ))}
-      </ul>
-    </main>
-  </PageContent>
+  <div id="issues-content">
+    <div class="wrapper">
+      <h1>Issues</h1>
+      <main>
+        <div class="issues-list">
+          {issuesWithContent.map(({ issue, Content }) => (
+            <div class="issue-item">
+              <div class="feature-image">
+                {issue.data.cover && (
+                  <img src={issue.data.cover} alt={issue.data.title} />
+                )}
+              </div>
+              <div class="issue-description">
+                <a href={`/issues/${issue.slug}`}>
+                  <h2 class="issue-title">{issue.data.title}</h2>
+                </a>
+                <div class="issue-description-details">
+                  <Content />
+                </div>
+                <div class="issue-sample-pages">
+                  {issue.data.sample_pages?.length > 0 && (
+                    <button
+                      class="sample-pages-trigger"
+                      data-images={JSON.stringify(issue.data.sample_pages.map((p: { image: string }) => p.image))}
+                    >
+                      サンプル画像はこちら
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Single shared lightbox overlay -->
+  <div id="lightbox" aria-modal="true" role="dialog" aria-hidden="true">
+    <button id="lightbox-close" aria-label="Close">✕</button>
+    <button id="lightbox-prev" aria-label="Previous">&#8249;</button>
+    <div id="lightbox-image-wrap">
+      <img id="lightbox-img" src="" alt="Sample page" />
+    </div>
+    <button id="lightbox-next" aria-label="Next">&#8250;</button>
+    <div id="lightbox-counter"></div>
+  </div>
 </Layout>
 
 <style>
+  /* ── existing styles (unchanged) ── */
+  #issues-content {
+    margin: 180px 0 0 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2rem;
+    align-items: center;
+  }
+
   .issues-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .issue-item {
+    display: flex;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .issue-description-details {
+    h1 { font-size: 1.5rem; }
+    h2 {
+      font-size: 1.2rem;
+      letter-spacing: 8px;
+      background: #eeeeeeff;
+      width: fit-content;
+      padding: 0 16px;
+    }
+  }
+
+  .feature-image {
+    border-radius: 32px;
+    overflow: hidden;
+    width: 50%;
+  }
+
+  .issue-description {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 32px;
+    width: 50%;
+  }
+
+  .issue-sample-pages {
+    display: flex;
+    justify-content: center;
   }
 
   .issue-item a {
@@ -47,9 +129,132 @@ const issuesWithContent = await Promise.all(
     color: inherit;
   }
 
-  .issue-item img {
+  /* ── trigger button ── */
+  .sample-pages-trigger {
+    background: yellow;
+    padding: 0 8px;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+  }
+
+  /* ── lightbox ── */
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #lightbox[aria-hidden="false"] {
+    display: flex;
+  }
+
+  #lightbox-image-wrap {
+    max-width: 80vw;
+    max-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #lightbox-img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
     display: block;
-    width: 100%;
-    height: auto;
+  }
+
+  #lightbox-close {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  #lightbox-prev,
+  #lightbox-next {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 4rem;
+    cursor: pointer;
+    padding: 0 1rem;
+    line-height: 1;
+    user-select: none;
+  }
+
+  #lightbox-counter {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 0.9rem;
+    opacity: 0.7;
   }
 </style>
+
+<script>
+  const lightbox = document.getElementById('lightbox')!;
+  const img = document.getElementById('lightbox-img') as HTMLImageElement;
+  const counter = document.getElementById('lightbox-counter')!;
+
+  let images: string[] = [];
+  let current = 0;
+
+  function show(index: number) {
+    current = (index + images.length) % images.length;
+    img.src = images[current];
+    counter.textContent = `${current + 1} / ${images.length}`;
+  }
+
+  function open(imageList: string[]) {
+    images = imageList;
+    show(0);
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    img.src = '';
+    images = [];
+  }
+
+  // Trigger buttons
+  document.querySelectorAll<HTMLButtonElement>('.sample-pages-trigger').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const imageList = JSON.parse(btn.dataset.images ?? '[]') as string[];
+      if (imageList.length) open(imageList);
+    });
+  });
+
+  document.getElementById('lightbox-close')!.addEventListener('click', close);
+  document.getElementById('lightbox-prev')!.addEventListener('click', () => show(current - 1));
+  document.getElementById('lightbox-next')!.addEventListener('click', () => show(current + 1));
+
+  // Close on backdrop click (not on the inner controls)
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) close();
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.getAttribute('aria-hidden') === 'true') return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+</script>
