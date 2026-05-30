@@ -14,6 +14,12 @@ cover: /assets/イラスト7.png
 photos:
   - image: /assets/uploads/イラスト3.png
   - image: /assets/uploads/イラスト4.png
+sample_pages:
+  - image: /assets/uploads/vol2_コミック_001.png
+  - image: /assets/uploads/vol2_コミック_2.png
+  - image: /assets/uploads/vol2_コミック_3.png
+  - image: /assets/uploads/vol2_コミック_4.png
+  - image: /assets/uploads/vol2_コミック_5.png
 ---
 # 特集
 
