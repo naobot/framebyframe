@@ -1,7 +1,15 @@
 ---
 published: true
 title: アニメ業界とフェミニズム Vol.2
-description: ''
+description: |-
+  アニメ業界とフェミニズム2  
+  連なる、つながる、つづいていく
+
+    
+  B6/本文164P/￥1500  
+    
+  表紙と同じ紙を使用したしおり付き。  
+  本文には、古紙パルプを70％以上配合した再生紙を使用しています。
 cover: /assets/イラスト7.png
 photos:
   - image: /assets/uploads/イラスト3.png
