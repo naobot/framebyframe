@@ -10,7 +10,7 @@ description: |-
     
   表紙と同じ紙を使用したしおり付き。  
   本文には、古紙パルプを70％以上配合した再生紙を使用しています。
-cover: /assets/イラスト7.png
+cover: /assets/uploads/イラスト7.png
 photos:
   - image: /assets/uploads/イラスト3.png
   - image: /assets/uploads/イラスト4.png
@@ -20,6 +20,7 @@ sample_pages:
   - image: /assets/uploads/vol2_コミック_3.png
   - image: /assets/uploads/vol2_コミック_4.png
   - image: /assets/uploads/vol2_コミック_5.png
+buy_link: 'https://fbfkomaokuri.base.shop/items/143642417'
 ---
 # 特集
 
