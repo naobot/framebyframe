@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 
 const issues = await getCollection('issues', ({ data }) => data.published !== false);
 const latestIssue = issues.at(-1);
-console.log(issues);
+// console.log(issues);
 ---
 
 <Fragment>
