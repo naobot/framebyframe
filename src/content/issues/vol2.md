@@ -2,7 +2,10 @@
 published: true
 title: アニメ業界とフェミニズム Vol.2
 description: ''
-cover: '/assets/イラスト7.png'
+cover: /assets/イラスト7.png
+photos:
+  - image: /assets/uploads/イラスト3.png
+  - image: /assets/uploads/イラスト4.png
 ---
 # 特集
 
