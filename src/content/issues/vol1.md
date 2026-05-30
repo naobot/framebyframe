@@ -1,6 +1,24 @@
 ---
 title: アニメ業界とフェミニズム Vol.1
 published: true
+cover: /assets/uploads/IMG_9335.JPG
+photos:
+  - image: /assets/uploads/IMG_9345.JPG
+sample_pages:
+  - image: /assets/uploads/vol1web01.png
+  - image: /assets/uploads/vol2web02.png
+  - image: /assets/uploads/vol2web03.png
+  - image: /assets/uploads/vol2web04.png
+buy_link: 'https://fbfkomaokuri.base.shop/items/117374232'
+description: |-
+  アニメ業界とフェミニズム　vol.1  
+  誰も置いていかない物語を目指して
+
+    
+  B6/本文78P/￥1500  
+    
+  表紙と同じ紙を使用したしおり付き。  
+  本文には、古紙パルプを70％以上配合した再生紙を使用しています。
 ---
 # 特集
 
