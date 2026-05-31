@@ -22,9 +22,32 @@ const issuesWithContent = await Promise.all(
           {issuesWithContent.map(({ issue, Content }) => (
             <div class="issue-item">
               <div class="feature-image">
-                {issue.data.cover && (
-                  <img src={issue.data.cover} alt={issue.data.title} />
-                )}
+                {(() => {
+                  const slides = issue.data.photos?.length
+                    ? issue.data.photos.map((p: { image: string }) => p.image)
+                    : issue.data.cover
+                      ? [issue.data.cover]
+                      : [];
+
+                  return slides.length > 0 && (
+                    <>
+                      <div
+                        class="cover-carousel"
+                        data-slides={JSON.stringify(slides)}
+                      >
+                        <img class="carousel-img carousel-img--a active" src={slides[0]} alt={issue.data.title} />
+                        <img class="carousel-img carousel-img--b" src={slides[1] ?? slides[0]} alt={issue.data.title} />
+                      </div>
+                      {slides.length > 1 && (
+                        <div class="carousel-dots">
+                          {slides.map((_: string, i: number) => (
+                            <span class={`carousel-dot${i === 0 ? ' active' : ''}`} />
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  );
+                })()}
               </div>
               <div class="issue-description">
                 <a href={`/issues/${issue.slug}`}>
@@ -64,7 +87,6 @@ const issuesWithContent = await Promise.all(
 </Layout>
 
 <style>
-  /* ── existing styles (unchanged) ── */
   #issues-content {
     margin: 180px 0 0 0;
     width: 100%;
@@ -91,6 +113,7 @@ const issuesWithContent = await Promise.all(
       display: block;
       width: 100%;
       height: auto;
+      border-radius: 32px;
     }
   }
 
@@ -103,12 +126,6 @@ const issuesWithContent = await Promise.all(
       width: fit-content;
       padding: 0 16px;
     }
-  }
-
-  .feature-image {
-    border-radius: 32px;
-    overflow: hidden;
-    width: 50%;
   }
 
   .issue-description {
@@ -203,6 +220,61 @@ const issuesWithContent = await Promise.all(
     font-size: 0.9rem;
     opacity: 0.7;
   }
+
+  /* ── carousel ── */
+  .feature-image {
+    position: relative;
+    border-radius: 32px;
+    overflow: visible;
+    width: 50%;
+    aspect-ratio: 3 / 4;
+  }
+
+  .cover-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 32px;
+    overflow: hidden;
+  }
+
+  .carousel-img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+  }
+
+  .carousel-img.active {
+    opacity: 1;
+  }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 1;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transition: background 0.2s;
+  }
+
+  .carousel-dot.active {
+    background: #fff;
+  }
 </style>
 
 <script>
@@ -256,5 +328,34 @@ const issuesWithContent = await Promise.all(
     if (e.key === 'Escape') close();
     if (e.key === 'ArrowLeft') show(current - 1);
     if (e.key === 'ArrowRight') show(current + 1);
+  });
+
+  // Cover carousels
+  document.querySelectorAll<HTMLElement>('.cover-carousel').forEach((carousel) => {
+    const slides = JSON.parse(carousel.dataset.slides ?? '[]') as string[];
+    if (slides.length <= 1) return;
+
+    const imgA = carousel.querySelector<HTMLImageElement>('.carousel-img--a')!;
+    const imgB = carousel.querySelector<HTMLImageElement>('.carousel-img--b')!;
+    const dots = carousel.closest<HTMLElement>('.feature-image')!
+      .querySelectorAll<HTMLElement>('.carousel-dot');
+    let current = 0;
+    let aIsActive = true;
+
+    function goTo(index: number) {
+      dots[current].classList.remove('active');
+      current = (index + slides.length) % slides.length;
+      dots[current].classList.add('active');
+
+      const incoming = aIsActive ? imgB : imgA;
+      const outgoing = aIsActive ? imgA : imgB;
+
+      incoming.src = slides[current];
+      incoming.classList.add('active');
+      outgoing.classList.remove('active');
+      aIsActive = !aIsActive;
+    }
+
+    setInterval(() => goTo(current + 1), 3000);
   });
 </script>
