@@ -1,5 +1,5 @@
 ---
-published: true
+published: false
 title: アニメ業界とフェミニズム Vol.2
 description: |-
   アニメ業界とフェミニズム2  
