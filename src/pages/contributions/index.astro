@@ -1,12 +1,165 @@
 ---
-import PageContent from '../../components/PageContent.astro';
 import Layout from '../../layouts/Layout.astro';
-
-const { default: Content, frontmatter } = await import('../../content/contributions.md');
+import contributeData from '../../data/contribute.json';
 ---
 
-<Layout>
-  <PageContent title={frontmatter.title}>
-    <Content slot="content" />
-  </PageContent>
+<Layout title="About">
+  <div class="about-page">
+    <div id="page-content">
+      <div class="wrapper">
+        <!-- <div class="lang-toggle">
+          <button id="btn-jp" class="active">JP</button>
+          /
+          <button id="btn-en">EN</button>
+        </div> -->
+
+        <div class="sections">
+          {contributeData &&
+            <section class="contribute-section">
+              {contributeData.title && (
+                <h2 class="heading jp">{ contributeData.title }</h2>
+              )}
+              {/*{section.heading_en && (
+                <h2 class="heading en" aria-hidden="true">{ section.heading_en }</h2>
+              )}*/}
+
+              {contributeData.subtitle && (
+                <h3 class="subheading jp">{ contributeData.subtitle }</h3>
+              )}
+              {/*{section.subheading_en && (
+                <h3 class="subheading en" aria-hidden="true">{ section.subheading_en }</h3>
+              )}*/}
+
+              {contributeData.description && (
+                <div class="text jp">
+                  <p set:html={contributeData.description} />
+                </div>
+              )}
+              {/*{section.text_en && (
+                <div class="text en" aria-hidden="true" >
+                  <p set:html={section.text_en} />
+                </div>
+              )}*/}
+
+              {contributeData.contribution_link && contributeData.contribution_button && (
+                <a href={contributeData.contribution_link} class="contribute-link">
+                  { contributeData.contribution_button }
+                </a>
+              )}
+            </section>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
 </Layout>
+
+<script>
+  const btnJp = document.getElementById('btn-jp');
+  const btnEn = document.getElementById('btn-en');
+
+  function setLang(lang: 'jp' | 'en') {
+    const show = lang === 'jp' ? 'jp' : 'en';
+    const hide = lang === 'jp' ? 'en' : 'jp';
+
+    document.querySelectorAll<HTMLElement>(`.${show}`).forEach(el => {
+      el.style.display = '';
+      el.removeAttribute('aria-hidden');
+    });
+    document.querySelectorAll<HTMLElement>(`.${hide}`).forEach(el => {
+      el.style.display = 'none';
+      el.setAttribute('aria-hidden', 'true');
+    });
+
+    btnJp?.classList.toggle('active', lang === 'jp');
+    btnEn?.classList.toggle('active', lang === 'en');
+  }
+
+  btnJp?.addEventListener('click', () => setLang('jp'));
+  btnEn?.addEventListener('click', () => setLang('en'));
+
+  // Initialise: hide EN elements on load
+  setLang('jp');
+</script>
+
+<style>
+  .lang-toggle {
+    display: flex;
+    gap: 0.5rem;
+    padding: 16px;
+  }
+
+  .lang-toggle button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    font-weight: 300;
+  }
+
+  .lang-toggle button.active {
+    font-weight: 800;
+  }
+
+  #page-content {
+    margin: 180px 0 0 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2rem;
+    align-items: center;
+  }
+
+  .sections {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 20px auto;
+  }
+
+  section {
+    background: white;
+    width: 90vw;
+    max-width: 600px;
+    padding: 2rem;
+
+    h1:not(.heading) {
+      font-weight: 800;
+      font-size: 1.4em;
+      margin-bottom: 8px;
+    }
+
+    h3:not(.subheading) {
+      font-weight: 800;
+      font-size: 1em;
+      margin-top: 0;
+      color: #797979ff;
+    }
+
+    p {
+      white-space: pre-wrap;
+    }
+  }
+
+  h1, h2, h3 {
+    text-align: center;
+  }
+
+  h2, h3 {
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 2em;
+    font-weight: 800;
+  }
+  h3 {
+    font-size: 0.8em;
+    font-weight: 300;
+  }
+</style>

@@ -31,15 +31,6 @@
       ]
     },
     {
-      "name": "contributions",
-      "label": "Contributions",
-      "path": "src/content/contributions.md",
-      "fields": [
-        { "name": "title", "label": "Title", "type": "text", "required": true },
-        { "name": "subtitle", "label": "Subtitle", "type": "text", "required": false }
-      ]
-    },
-    {
       "name": "shops",
       "label": "Shop List",
       "path": "src/content/shops.md",
@@ -82,6 +73,17 @@
             { "name": "link", "label": "Link", "type": "text", "required": true }
           ]
         }
+      ]
+    },
+    {
+      "path": "src/data/contribute.json",
+      "label": "Contribute",
+      "fields": [
+        { "name": "title", "label": "Title", "type": "text", "required": true },
+        { "name": "subtitle", "label": "Subtitle", "type": "text", "required": false },
+        { "name": "description", "label": "Description", "type": "rich-text", "required": false },
+        { "name": "contribution_link", "label": "Contribution Link", "type": "url", "required": false },
+        { "name": "contribution_button", "label": "Contribution Button Text", "type": "text", "required": false }
       ]
     },
     {
