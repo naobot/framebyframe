@@ -19,22 +19,20 @@ const descriptionHtml = contributeData.description
           <button id="btn-en">EN</button>
         </div> -->
 
+        {contributeData.title && (
+          <h1 class="heading jp">{ contributeData.title }</h1>
+        )}
+        {/*{section.heading_en && (
+          <h2 class="heading en" aria-hidden="true">{ section.heading_en }</h2>
+        )}*/}
+
+        {contributeData.subtitle && (
+          <h2 class="subheading jp">{ contributeData.subtitle }</h2>
+        )}
+
         <div class="sections">
           {contributeData &&
             <section class="contribute-section">
-              {contributeData.title && (
-                <h2 class="heading jp">{ contributeData.title }</h2>
-              )}
-              {/*{section.heading_en && (
-                <h2 class="heading en" aria-hidden="true">{ section.heading_en }</h2>
-              )}*/}
-
-              {contributeData.subtitle && (
-                <h3 class="subheading jp">{ contributeData.subtitle }</h3>
-              )}
-              {/*{section.subheading_en && (
-                <h3 class="subheading en" aria-hidden="true">{ section.subheading_en }</h3>
-              )}*/}
 
               {descriptionHtml && (
                 <div class="text jp" set:html={descriptionHtml} />
@@ -158,19 +156,12 @@ const descriptionHtml = contributeData.description
 
   h1, h2, h3 {
     text-align: center;
-  }
-
-  h2, h3 {
     margin: 0;
   }
 
   h2 {
-    font-size: 2em;
+    font-size: 1em;
     font-weight: 800;
-  }
-  h3 {
-    font-size: 0.8em;
-    font-weight: 300;
   }
 
   .contribute-link {
