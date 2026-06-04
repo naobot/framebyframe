@@ -1,12 +1,139 @@
 ---
-import PageContent from '../../components/PageContent.astro';
 import Layout from '../../layouts/Layout.astro';
+import aboutData from '../../data/about.json';
 
-const { default: Content, frontmatter } = await import('../../content/about.md');
+const sections = aboutData.sections ?? [];
 ---
 
-<Layout>
-  <PageContent title={frontmatter.title}>
-    <Content slot="content" />
-  </PageContent>
+<Layout title="About">
+  <div class="about-page">
+    <div id="page-content">
+      <div class="wrapper">
+        <div class="lang-toggle">
+          <button id="btn-jp" class="active">JP</button>
+          /
+          <button id="btn-en">EN</button>
+        </div>
+
+        <div class="sections">
+          {sections.map((section) => (
+            <section class="about-section">
+              {section.heading && (
+                <h2 class="heading jp">{ section.heading }</h2>
+              )}
+              {section.heading_en && (
+                <h2 class="heading en" aria-hidden="true">{ section.heading_en }</h2>
+              )}
+
+              {section.subheading && (
+                <h3 class="subheading jp">{ section.subheading }</h3>
+              )}
+              {section.subheading_en && (
+                <h3 class="subheading en" aria-hidden="true">{ section.subheading_en }</h3>
+              )}
+
+              {section.text && (
+                <p class="text jp">{ section.text }</p>
+              )}
+              {section.text_en && (
+                <p class="text en" aria-hidden="true">{ section.text_en }</p>
+              )}
+            </section>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
 </Layout>
+
+<script>
+  const btnJp = document.getElementById('btn-jp');
+  const btnEn = document.getElementById('btn-en');
+
+  function setLang(lang: 'jp' | 'en') {
+    const show = lang === 'jp' ? 'jp' : 'en';
+    const hide = lang === 'jp' ? 'en' : 'jp';
+
+    document.querySelectorAll<HTMLElement>(`.${show}`).forEach(el => {
+      el.style.display = '';
+      el.removeAttribute('aria-hidden');
+    });
+    document.querySelectorAll<HTMLElement>(`.${hide}`).forEach(el => {
+      el.style.display = 'none';
+      el.setAttribute('aria-hidden', 'true');
+    });
+
+    btnJp?.classList.toggle('active', lang === 'jp');
+    btnEn?.classList.toggle('active', lang === 'en');
+  }
+
+  btnJp?.addEventListener('click', () => setLang('jp'));
+  btnEn?.addEventListener('click', () => setLang('en'));
+
+  // Initialise: hide EN elements on load
+  setLang('jp');
+</script>
+
+<style>
+  .lang-toggle {
+    display: flex;
+    gap: 0.5rem;
+    padding: 16px;
+  }
+
+  .lang-toggle button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    font-weight: 300;
+  }
+
+  .lang-toggle button.active {
+    font-weight: 800;
+  }
+
+  #page-content {
+    margin: 180px 0 0 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2rem;
+    align-items: center;
+  }
+
+  .sections {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  section {
+    background: white;
+    width: 90vw;
+    max-width: 600px;
+    padding: 2rem;
+  }
+
+  h1, h2, h3 {
+    text-align: center;
+  }
+
+  h2, h3 {
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 2em;
+    font-weight: 800;
+  }
+  h3 {
+    font-size: 0.8em;
+    font-weight: 300;
+  }
+</style>
