@@ -33,10 +33,14 @@ const sections = aboutData.sections ?? [];
               )}
 
               {section.text && (
-                <p class="text jp">{ section.text }</p>
+                <div class="text jp">
+                  <p set:html={section.text} />
+                </div>
               )}
               {section.text_en && (
-                <p class="text en" aria-hidden="true">{ section.text_en }</p>
+                <div class="text en" aria-hidden="true" >
+                  <p set:html={section.text_en} />
+                </div>
               )}
             </section>
           ))}
@@ -118,6 +122,23 @@ const sections = aboutData.sections ?? [];
     width: 90vw;
     max-width: 600px;
     padding: 2rem;
+
+    h1:not(.heading) {
+      font-weight: 800;
+      font-size: 1.4em;
+      margin-bottom: 8px;
+    }
+
+    h3:not(.subheading) {
+      font-weight: 800;
+      font-size: 1em;
+      margin-top: 0;
+      color: #797979ff;
+    }
+
+    p {
+      white-space: pre-wrap;
+    }
   }
 
   h1, h2, h3 {
