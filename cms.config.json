@@ -82,7 +82,7 @@
         { "name": "title", "label": "Title", "type": "text", "required": true },
         { "name": "subtitle", "label": "Subtitle", "type": "text", "required": false },
         { "name": "description", "label": "Description", "type": "rich-text", "required": false },
-        { "name": "contribution_link", "label": "Contribution Link", "type": "url", "required": false },
+        { "name": "contribution_link", "label": "Contribution Link", "type": "text", "required": false },
         { "name": "contribution_button", "label": "Contribution Button Text", "type": "text", "required": false }
       ]
     },

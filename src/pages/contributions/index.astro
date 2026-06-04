@@ -1,6 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import contributeData from '../../data/contribute.json';
+import { marked } from 'marked';
+
+const descriptionHtml = contributeData.description
+  ? marked.parse(contributeData.description)
+  : null;
 ---
 
 <Layout title="About">
@@ -30,10 +35,8 @@ import contributeData from '../../data/contribute.json';
                 <h3 class="subheading en" aria-hidden="true">{ section.subheading_en }</h3>
               )}*/}
 
-              {contributeData.description && (
-                <div class="text jp">
-                  <p set:html={contributeData.description} />
-                </div>
+              {descriptionHtml && (
+                <div class="text jp" set:html={descriptionHtml} />
               )}
               {/*{section.text_en && (
                 <div class="text en" aria-hidden="true" >
@@ -46,6 +49,10 @@ import contributeData from '../../data/contribute.json';
                   { contributeData.contribution_button }
                 </a>
               )}
+
+              <p>
+                内容を確認の上、折り返しご連絡いたします。
+              </p>
             </section>
           }
         </div>
