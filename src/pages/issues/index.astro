@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ActionButton from '../../components/ActionButton.astro';
 import { getCollection, render } from 'astro:content';
 
 const issues = await getCollection('issues', ({ data }) => data.published !== false);
@@ -58,12 +59,12 @@ const issuesWithContent = await Promise.all(
                 </div>
                 <div class="issue-sample-pages">
                   {issue.data.sample_pages?.length && issue.data.sample_pages?.length > 0 && (
-                    <button
+                    <ActionButton
                       class="sample-pages-trigger"
                       data-images={JSON.stringify(issue.data.sample_pages.map((p: { image: string }) => p.image))}
                     >
                       サンプル画像はこちら
-                    </button>
+                    </ActionButton>
                   )}
                 </div>
               </div>
@@ -145,17 +146,6 @@ const issuesWithContent = await Promise.all(
     display: block;
     text-decoration: none;
     color: inherit;
-  }
-
-  /* ── trigger button ── */
-  .sample-pages-trigger {
-    background: yellow;
-    padding: 0 8px;
-    font-weight: 800;
-    border: none;
-    cursor: pointer;
-    font-size: inherit;
-    font-family: inherit;
   }
 
   /* ── lightbox ── */
