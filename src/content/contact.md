@@ -1,5 +1,5 @@
 ---
-title: "Contact"
+title: Contact
+subtitle: お問い合わせ
 ---
-
-Contact
+[✉️ fbf.komaokuri@gmail.com](mailto:ailfbf.komaokuri@gmail.com)
