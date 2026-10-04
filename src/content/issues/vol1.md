@@ -1,6 +1,6 @@
 ---
 title: アニメ業界とフェミニズム Vol.1
-published: false
+published: true
 cover: /assets/uploads/IMG_9335.JPG
 photos:
   - image: /assets/uploads/IMG_9345.JPG
