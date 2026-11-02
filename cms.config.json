@@ -29,15 +29,6 @@
         { "name": "title", "label": "Title", "type": "text", "required": true },
         { "name": "subtitle", "label": "Subtitle", "type": "text", "required": false }
       ]
-    },
-    {
-      "name": "shops",
-      "label": "Shop List",
-      "path": "src/content/shops.md",
-      "fields": [
-        { "name": "title", "label": "Title", "type": "text", "required": true },
-        { "name": "subtitle", "label": "Subtitle", "type": "text", "required": false }
-      ]
     }
   ],
   "data_files": [
@@ -84,6 +75,30 @@
         { "name": "description", "label": "Description", "type": "rich-text", "required": false },
         { "name": "contribution_link", "label": "Contribution Link", "type": "text", "required": false },
         { "name": "contribution_button", "label": "Contribution Button Text", "type": "text", "required": false }
+      ]
+    },
+    {
+      "name": "shops",
+      "label": "Shop List",
+      "path": "src/data/shops.json",
+      "fields": [
+        { "name": "title", "label": "Title", "type": "text", "required": true },
+        { "name": "subtitle", "label": "Subtitle", "type": "text", "required": false },
+        { "name": "intro", "label": "Intro", "type": "rich-text", "required": false },
+        { "name": "title_en", "label": "Title (EN)", "type": "text", "required": false },
+        { "name": "subtitle_en", "label": "Subtitle (EN)", "type": "text", "required": false },
+        { "name": "intro_en", "label": "Intro (EN)", "type": "rich-text", "required": false },
+        {
+          "name": "shops",
+          "label": "Shops",
+          "type": "list-of-objects",
+          "fields": [
+            { "name": "name", "label": "Shop Name", "type": "text", "required": true },
+            { "name": "region", "label": "City / Region", "type": "text", "required": false },
+            { "name": "address", "label": "Address", "type": "textarea", "required": false },
+            { "name": "website", "label": "Website", "type": "text", "required": false }
+          ]
+        }
       ]
     },
     {

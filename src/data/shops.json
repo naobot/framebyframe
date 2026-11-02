@@ -1,0 +1,28 @@
+{
+  "title": "取扱店",
+  "subtitle": "Shop List",
+  "intro": "コマ送りをお取り扱いいただいている書店・ショップの一覧です。\n\n在庫状況は各店舗にお問い合わせください。",
+  "title_en": "Shop List",
+  "subtitle_en": "Where to find us",
+  "intro_en": "Shops and bookstores currently stocking Frame by Frame.\n\nPlease contact each shop directly to check availability.",
+  "shops": [
+    {
+      "name": "Sample Bookstore",
+      "region": "Tokyo",
+      "address": "1-2-3 Somewhere, Shibuya-ku, Tokyo",
+      "website": "https://example.com"
+    },
+    {
+      "name": "Sample Shop",
+      "region": "Tokyo",
+      "address": "",
+      "website": ""
+    },
+    {
+      "name": "Sample Gallery",
+      "region": "Montréal",
+      "address": "123 Rue Example, Montréal, QC",
+      "website": "https://example.com"
+    }
+  ]
+}

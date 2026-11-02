@@ -1,0 +1,172 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import shopsData from '../../../data/shops.json';
+import { getLang, localePaths, t } from '../../../i18n';
+import { marked } from 'marked';
+
+export const getStaticPaths = localePaths;
+
+const lang = getLang(Astro.url);
+
+const title = t(shopsData, 'title', lang);
+const subtitle = t(shopsData, 'subtitle', lang);
+const intro = t(shopsData, 'intro', lang);
+const introHtml = intro ? marked.parse(intro) : null;
+
+type Shop = { name: string; region?: string; address?: string; website?: string };
+
+// Group by region in first-appearance order; shops with no region go last.
+const groups = new Map<string, Shop[]>();
+const ungrouped: Shop[] = [];
+
+for (const shop of (shopsData.shops ?? []) as Shop[]) {
+  if (!shop.name) continue;
+  const region = shop.region?.trim();
+  if (!region) {
+    ungrouped.push(shop);
+    continue;
+  }
+  const group = groups.get(region);
+  if (group) {
+    group.push(shop);
+  } else {
+    groups.set(region, [shop]);
+  }
+}
+
+const regionGroups: [string, Shop[]][] = [...groups.entries()];
+if (ungrouped.length) regionGroups.push(['', ungrouped]);
+---
+
+<Layout title={title}>
+  <div class="shops-page">
+    <div id="page-content">
+      <div class="wrapper">
+        <div class="sections">
+          <section class="intro-section">
+            {title && <h1 class="heading">{ title }</h1>}
+            {subtitle && <h3 class="subheading">{ subtitle }</h3>}
+            {introHtml && <div class="text" set:html={introHtml} />}
+          </section>
+
+          {regionGroups.map(([region, shops]) => (
+            <section class="region-section">
+              {region && (
+                <h2 class="region">{ region }</h2>
+              )}
+
+              <ul class="shop-list">
+                {shops.map((shop) => (
+                  <li class="shop">
+                    <span class="shop-name">{ shop.name }</span>
+                    {shop.address && (
+                      <p class="shop-address">{ shop.address }</p>
+                    )}
+                    {shop.website && (
+                      <a class="shop-website" href={shop.website} target="_blank" rel="noopener">
+                        { shop.website.replace(/^https?:\/\//, '').replace(/\/$/, '') }
+                      </a>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  #page-content {
+    margin: 180px 0 0 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2rem;
+    align-items: center;
+  }
+
+  .sections {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 20px auto;
+  }
+
+  section {
+    background: white;
+    width: 90vw;
+    max-width: 600px;
+    padding: 2rem;
+  }
+
+  .intro-section {
+    h1, h3 {
+      text-align: center;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 2em;
+      font-weight: 800;
+    }
+
+    h3 {
+      font-size: 0.8em;
+      font-weight: 300;
+    }
+
+    .text {
+      margin-top: 1rem;
+
+      p {
+        margin: 0.5rem 0;
+      }
+    }
+  }
+
+  .region-section {
+    h2.region {
+      margin: 0 0 1rem 0;
+      font-size: 1.2em;
+      font-weight: 800;
+    }
+  }
+
+  .shop-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .shop + .shop {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .shop-name {
+    display: block;
+    font-weight: 800;
+  }
+
+  .shop-address {
+    margin: 0.25rem 0 0 0;
+    font-size: 0.9em;
+    color: #797979ff;
+    white-space: pre-wrap;
+  }
+
+  .shop-website {
+    display: inline-block;
+    margin-top: 0.25rem;
+    font-size: 0.9em;
+    text-decoration: underline;
+  }
+</style>

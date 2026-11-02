@@ -3,6 +3,7 @@
     { "name": "Issues", "link": "/issues" },
     { "name": "News", "link": "/#news" },
     { "name": "About", "link": "/about" },
+    { "name": "Shops", "link": "/shops" },
     { "name": "Contact", "link": "/contact" },
     { "name": "Contributions", "link": "/contributions" }
   ]
