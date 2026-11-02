@@ -1,35 +1,138 @@
 ---
+import NewsRow from './NewsRow.astro';
 import newsData from '../data/news.json';
-const { items } = newsData;
+import { getLang, localePath, t } from '../i18n';
+import { ui } from '../i18n/ui';
+
+type NewsItem = {
+  title: string;
+  year?: string;
+  month?: string;
+  day?: string;
+  date_note?: string;
+  description?: string;
+  link?: string;
+  title_en?: string;
+  date_note_en?: string;
+  description_en?: string;
+};
+
+const items = (newsData.items ?? []) as NewsItem[];
+const lang = getLang(Astro.url);
+
+// Display date: the editor's free-text note wins, otherwise year.month.day
+function formatDate(item: NewsItem) {
+  const note = t(item, 'date_note', lang);
+  if (note) return note;
+
+  const date: string[] = [];
+
+  item.year && date.push(item.year);
+  item.month && date.push(item.month);
+  item.day && date.push(item.day);
+
+  return date.join('.');
+}
+
+// Comparable YYYYMMDD key. A missing month means end of year and a missing day
+// means end of month, so "2026.04" stays upcoming until April is over.
+function sortKey(item: NewsItem) {
+  const year = Number(item.year);
+  if (!year) return 0;
+
+  const month = Number(item.month) || 12;
+  const day = Number(item.day) || new Date(year, month, 0).getDate();
+
+  return year * 10000 + month * 100 + day;
+}
+
+const today = new Date();
+const todayKey =
+  today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+
+const keyed = items.map((item) => ({ item, key: sortKey(item) }));
+
+const upcoming = keyed
+  .filter(({ key }) => key >= todayKey)
+  .sort((a, b) => a.key - b.key);
+
+// Undated items (key 0) land here too, at the bottom.
+const past = keyed
+  .filter(({ key }) => key < todayKey)
+  .sort((a, b) => b.key - a.key);
 ---
 
 <section id="news">
   <div>
-    <h2>News</h2>
+    <h2>{ui('newsHeading', lang)}</h2>
   </div>
 
-  <div>
-    {items.map((newsItem) => {
-      const formattedDate = (() => {
-        const date: string[] = []
+  {upcoming.length > 0 && (
+    <div class="news-group" id="news-upcoming">
+      <h3>{ui('newsUpcoming', lang)}</h3>
 
-        newsItem.year && date.push(newsItem.year)
-        newsItem.month && date.push(newsItem.month)
-        newsItem.day && date.push(newsItem.day)
+      {upcoming.map(({ item, key }) => (
+        <NewsRow
+          date={formatDate(item)}
+          title={t(item, 'title', lang) ?? ''}
+          sortKey={key}
+          description={t(item, 'description', lang)}
+          link={localePath(lang, item.link)}
+        />
+      ))}
+    </div>
+  )}
 
-        return date.join('.')
-      })()
-
-      return (
-        <div class="news-row">
-          <span>{formattedDate}</span>
-          <span class="dots"></span>
-          <span>{newsItem.title}</span>
-        </div>
-      )
-    })}
+  <div class="news-group" id="news-past">
+    {past.map(({ item, key }) => (
+      <NewsRow
+        date={formatDate(item)}
+        title={t(item, 'title', lang) ?? ''}
+        sortKey={key}
+        description={t(item, 'description', lang)}
+        link={localePath(lang, item.link)}
+      />
+    ))}
   </div>
 </section>
+
+<script>
+  // The upcoming/past split is decided at build time, so a deploy that sits for
+  // a while could show a finished item as upcoming. Re-check on load and move
+  // any stale rows down into the past list. Normally a no-op.
+  const upcomingGroup = document.getElementById('news-upcoming');
+  const pastGroup = document.getElementById('news-past');
+
+  if (upcomingGroup && pastGroup) {
+    const now = new Date();
+    const todayKey =
+      now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
+
+    const keyOf = (el: Element) => Number(el.getAttribute('data-sort-key')) || 0;
+
+    const stale = [...upcomingGroup.querySelectorAll('.news-row')].filter(
+      (row) => keyOf(row) < todayKey
+    );
+
+    for (const row of stale) {
+      if (row instanceof HTMLDetailsElement) row.open = false;
+
+      const next = [...pastGroup.querySelectorAll('.news-row')].find(
+        (candidate) => keyOf(candidate) < keyOf(row)
+      );
+
+      if (next) {
+        pastGroup.insertBefore(row, next);
+      } else {
+        pastGroup.appendChild(row);
+      }
+    }
+
+    if (!upcomingGroup.querySelector('.news-row')) {
+      upcomingGroup.hidden = true;
+    }
+  }
+</script>
 
 <style>
   #news {
@@ -37,16 +140,11 @@ const { items } = newsData;
     flex-direction: column;
     padding: 1rem 2rem;
 
-    .news-row {
-      display: flex;
-      align-items: baseline;
-      margin: 1rem 0;
-    }
-
-    .dots {
-      flex-grow: 1;
-      border-bottom: 2px dotted #000;
-      margin: 0 10px;
+    .news-group h3 {
+      margin: 0.5rem 0 0 0;
+      font-size: 0.9em;
+      font-weight: 800;
+      color: #797979ff;
     }
   }
 </style>

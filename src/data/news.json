@@ -1,7 +1,14 @@
 {
   "items": [
     {
-      "heading": "Placeholder News",
+      "title": "Vol.3 制作中です",
+      "year": "2027",
+      "month": "03",
+      "date_note": "2027年春頃",
+      "description": "Vol.3の制作を進めています。\n詳細が決まり次第、こちらとSNSでお知らせします。",
+      "link": "/issues"
+    },
+    {
       "year": "2026",
       "month": "04",
       "title": "Vol.2の情報を公開しました",

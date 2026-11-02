@@ -1,0 +1,105 @@
+---
+import { getLang } from '../i18n';
+import { ui } from '../i18n/ui';
+
+interface Props {
+  date: string;
+  title: string;
+  sortKey: number;
+  description?: string;
+  link?: string;
+}
+
+const { date, title, sortKey, description, link } = Astro.props;
+
+// Nothing to reveal means no accordion: render a plain row instead.
+const hasDetails = Boolean(description || link);
+const lang = getLang(Astro.url);
+---
+
+{hasDetails ? (
+  <details class="news-row" data-sort-key={sortKey}>
+    <summary>
+      <span>{date}</span>
+      <span class="dots"></span>
+      <span>{title}</span>
+      <span class="indicator" aria-hidden="true"></span>
+    </summary>
+
+    <div class="news-detail">
+      {description && (
+        <p class="news-description">{description}</p>
+      )}
+      {link && (
+        <a class="news-link" href={link}>{ui('newsReadMore', lang)}</a>
+      )}
+    </div>
+  </details>
+) : (
+  <div class="news-row" data-sort-key={sortKey}>
+    <span>{date}</span>
+    <span class="dots"></span>
+    <span>{title}</span>
+  </div>
+)}
+
+<style>
+  .news-row {
+    display: flex;
+    align-items: baseline;
+    margin: 1rem 0;
+  }
+
+  .dots {
+    flex-grow: 1;
+    border-bottom: 2px dotted #000;
+    margin: 0 10px;
+  }
+
+  details.news-row {
+    display: block;
+
+    summary {
+      display: flex;
+      align-items: baseline;
+      cursor: pointer;
+      list-style: none;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+    }
+
+    .indicator {
+      margin-left: 10px;
+      font-weight: 800;
+
+      &::before {
+        content: '+';
+      }
+    }
+
+    &[open] .indicator::before {
+      content: '−';
+    }
+  }
+
+  .news-detail {
+    margin: 0.5rem 0 0 0;
+    padding-left: 1rem;
+    border-left: 2px solid #e5e5e5;
+  }
+
+  .news-description {
+    margin: 0;
+    font-size: 0.9em;
+    white-space: pre-wrap;
+  }
+
+  .news-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.9em;
+    text-decoration: underline;
+  }
+</style>
