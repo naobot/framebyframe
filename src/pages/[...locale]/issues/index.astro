@@ -1,7 +1,13 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import ActionButton from '../../components/ActionButton.astro';
+import Layout from '../../../layouts/Layout.astro';
+import ActionButton from '../../../components/ActionButton.astro';
 import { getCollection, render } from 'astro:content';
+import { getLang, localePaths, t } from '../../../i18n';
+import { ui } from '../../../i18n/ui';
+
+export const getStaticPaths = localePaths;
+
+const lang = getLang(Astro.url);
 
 const issues = await getCollection('issues', ({ data }) => data.published !== false);
 const sorted = issues.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)).reverse();
@@ -14,13 +20,16 @@ const issuesWithContent = await Promise.all(
 );
 ---
 
-<Layout title="Issues">
+<Layout title={ui('issuesHeading', lang)}>
   <div id="issues-content">
     <div class="wrapper">
-      <h1>Issues</h1>
+      <h1>{ui('issuesHeading', lang)}</h1>
       <main>
         <div class="issues-list">
-          {issuesWithContent.map(({ issue, Content }) => (
+          {issuesWithContent.map(({ issue, Content }) => {
+            const issueTitle = t(issue.data, 'title', lang) ?? '';
+
+            return (
             <div class="issue-item">
               <div class="feature-image">
                 {(() => {
@@ -36,8 +45,8 @@ const issuesWithContent = await Promise.all(
                         class="cover-carousel"
                         data-slides={JSON.stringify(slides)}
                       >
-                        <img class="carousel-img carousel-img--a active" src={slides[0]} alt={issue.data.title} />
-                        <img class="carousel-img carousel-img--b" src={slides[1] ?? slides[0]} alt={issue.data.title} />
+                        <img class="carousel-img carousel-img--a active" src={slides[0]} alt={issueTitle} />
+                        <img class="carousel-img carousel-img--b" src={slides[1] ?? slides[0]} alt={issueTitle} />
                       </div>
                       {slides.length > 1 && (
                         <div class="carousel-dots">
@@ -52,7 +61,7 @@ const issuesWithContent = await Promise.all(
               </div>
               <div class="issue-description">
                 {/*<a href={`/issues/${issue.slug}`}>*/}
-                  <h2 class="issue-title">{issue.data.title}</h2>
+                  <h2 class="issue-title">{issueTitle}</h2>
                 {/*</a>*/}
                 <div class="issue-description-details">
                   <Content />
@@ -63,13 +72,14 @@ const issuesWithContent = await Promise.all(
                       class="sample-pages-trigger"
                       data-images={JSON.stringify(issue.data.sample_pages.map((p: { image: string }) => p.image))}
                     >
-                      サンプル画像はこちら
+                      {ui('samplePages', lang)}
                     </ActionButton>
                   )}
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </main>
     </div>
@@ -77,12 +87,12 @@ const issuesWithContent = await Promise.all(
 
   <!-- Single shared lightbox overlay -->
   <div id="lightbox" aria-modal="true" role="dialog" aria-hidden="true">
-    <button id="lightbox-close" aria-label="Close">✕</button>
-    <button id="lightbox-prev" aria-label="Previous">&#8249;</button>
+    <button id="lightbox-close" aria-label={ui('lightboxClose', lang)}>✕</button>
+    <button id="lightbox-prev" aria-label={ui('lightboxPrev', lang)}>&#8249;</button>
     <div id="lightbox-image-wrap">
-      <img id="lightbox-img" src="" alt="Sample page" />
+      <img id="lightbox-img" src="" alt={ui('samplePageAlt', lang)} />
     </div>
-    <button id="lightbox-next" aria-label="Next">&#8250;</button>
+    <button id="lightbox-next" aria-label={ui('lightboxNext', lang)}>&#8250;</button>
     <div id="lightbox-counter"></div>
   </div>
 </Layout>

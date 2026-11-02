@@ -4,18 +4,25 @@ import logoFull from '../assets/logo-full.png';
 import logoMark from '../assets/logo-mark.png';
 import Navigation from "./Navigation.astro";
 import Hanko from "./Hanko.astro";
+import LangSwitch from "./LangSwitch.astro";
+import { getLang, localePath } from '../i18n';
+import { ui } from '../i18n/ui';
+
+const lang = getLang(Astro.url);
+const home = localePath(lang, '/');
+const homeAlt = ui('homeLinkAlt', lang);
 ---
 
 <header id="site-header">
   <div class="logo-wrap">
     <div class="logo-item">
-      <a href="/">
-        <img id="logo-full" src={logoFull.src} alt="Frame by Frame Homepage" />
-        <img id="logo-mark" src={logoMark.src} alt="Frame by Frame Homepage" aria-hidden="true" />
+      <a href={home}>
+        <img id="logo-full" src={logoFull.src} alt={homeAlt} />
+        <img id="logo-mark" src={logoMark.src} alt={homeAlt} aria-hidden="true" />
       </a>
     </div>
     <div id="hanko-wrapper" class="logo-item">
-      <a href="/">
+      <a href={home}>
         <Hanko />
       </a>
     </div>
@@ -23,6 +30,7 @@ import Hanko from "./Hanko.astro";
     <Navigation />
   </div>
   <section id="links">
+    <LangSwitch />
     <div class="social-icons">
       <Social title="instagram" url="https://www.instagram.com/fbf_komaokuri" />
       <Social title="bluesky" url="https://bsky.app/profile/komaokurifbf.bsky.social" />
@@ -91,6 +99,12 @@ import Hanko from "./Hanko.astro";
       align-items: center;
       align-content: center;
     }
+  }
+
+  #links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
   }
 
   .social-icons {

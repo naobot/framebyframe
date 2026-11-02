@@ -2,18 +2,21 @@
 import Hero from './Hero.astro';
 import News from './News.astro';
 import { getCollection } from 'astro:content';
+import { getLang, localePath, t } from '../i18n';
+
+const lang = getLang(Astro.url);
 
 const issues = await getCollection('issues', ({ data }) => data.published !== false);
-const latestIssue = issues.at(-1);
+const latestIssue = issues.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)).at(-1);
 // console.log(issues);
 ---
 
 <Fragment>
   <Hero
-    heading={latestIssue?.data.title}
-    description={latestIssue?.data.description}
+    heading={t(latestIssue?.data, 'title', lang)}
+    description={t(latestIssue?.data, 'description', lang)}
     cover={latestIssue?.data.cover}
-    ctaHref="/issues"
+    ctaHref={localePath(lang, '/issues')}
   />
   <News />
 </Fragment>

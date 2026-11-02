@@ -1,10 +1,21 @@
 ---
 import Header from "../components/Header.astro";
+import { counterpartPath, getLang } from '../i18n';
 import '../styles/styles.scss';
+
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+
+const SITE_NAME = 'コマ送り - Frame by Frame';
+const lang = getLang(Astro.url);
+const other = counterpartPath(Astro.url);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang === 'en' ? 'en' : 'ja'}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -17,7 +28,10 @@ import '../styles/styles.scss';
 
 		<meta name="generator" content={Astro.generator} />
 
-		<title>コマ送り - Frame by Frame</title>
+		<link rel="alternate" hreflang={lang} href={Astro.url.pathname} />
+		<link rel="alternate" hreflang={lang === 'en' ? 'ja' : 'en'} href={other} />
+
+		<title>{title ? `${title} | ${SITE_NAME}` : SITE_NAME}</title>
 	</head>
 	<body>
 		<Header slot="header" />

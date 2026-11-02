@@ -1,4 +1,7 @@
 ---
+import { getLang } from '../i18n';
+import { ui } from '../i18n/ui';
+
 interface Props {
   heading: string;
   description: string;
@@ -7,6 +10,8 @@ interface Props {
 }
 
 const { heading, description, cover, ctaHref } = Astro.props;
+
+const lang = getLang(Astro.url);
 ---
 
 <section id="hero">
@@ -17,11 +22,11 @@ const { heading, description, cover, ctaHref } = Astro.props;
   <div class="text-side">
     <div class="text-content">
       <h2>
-        アニメ業界発、フェミニストとクィア当事者のアニメ業界人たちによる社会のことを考えるZINE
+        {ui('heroTagline', lang)}
       </h2>
       <h1>{heading}</h1>
       <p>{description}</p>
-      <a href={ctaHref} class="cta">→ More issues</a>
+      <a href={ctaHref} class="cta">{ui('heroCta', lang)}</a>
     </div>
   </div>
 </section>

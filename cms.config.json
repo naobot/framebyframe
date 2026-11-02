@@ -11,12 +11,14 @@
       "publishable": true,
       "fields": [
         { "name": "title", "label": "Title", "type": "text", "required": true },
+        { "name": "title_en", "label": "Title (EN)", "type": "text", "required": false },
         { "name": "publish_date", "label": "Publish Date", "type": "text", "required": false },
         { "name": "cover", "label": "Cover Photo", "type": "image", "required": false },
         { "name": "photos", "label": "Additional Photos", "type": "image-list", "required": false },
         { "name": "sample_pages", "label": "Sample Pages", "type": "image-list", "required": false },
         { "name": "buy_link", "label": "Buy Link", "type": "text", "required": false },
-        { "name": "description", "label": "Description", "type": "rich-text", "required": false }
+        { "name": "description", "label": "Description", "type": "rich-text", "required": false },
+        { "name": "description_en", "label": "Description (EN)", "type": "rich-text", "required": false }
       ]
     }
   ],
@@ -27,6 +29,7 @@
       "path": "src/content/contact.md",
       "fields": [
         { "name": "title", "label": "Title", "type": "text", "required": true },
+        { "name": "title_en", "label": "Title (EN)", "type": "text", "required": false },
         { "name": "subtitle", "label": "Subtitle", "type": "text", "required": false }
       ]
     }
@@ -61,6 +64,7 @@
           "type": "list-of-objects",
           "fields": [
             { "name": "name", "label": "Name", "type": "text", "required": true },
+            { "name": "name_en", "label": "Name (EN)", "type": "text", "required": false },
             { "name": "link", "label": "Link", "type": "text", "required": true }
           ]
         }
@@ -71,10 +75,16 @@
       "label": "Contribute",
       "fields": [
         { "name": "title", "label": "Title", "type": "text", "required": true },
+        { "name": "title_en", "label": "Title (EN)", "type": "text", "required": false },
         { "name": "subtitle", "label": "Subtitle", "type": "text", "required": false },
+        { "name": "subtitle_en", "label": "Subtitle (EN)", "type": "text", "required": false },
         { "name": "description", "label": "Description", "type": "rich-text", "required": false },
+        { "name": "description_en", "label": "Description (EN)", "type": "rich-text", "required": false },
         { "name": "contribution_link", "label": "Contribution Link", "type": "text", "required": false },
-        { "name": "contribution_button", "label": "Contribution Button Text", "type": "text", "required": false }
+        { "name": "contribution_button", "label": "Contribution Button Text", "type": "text", "required": false },
+        { "name": "contribution_button_en", "label": "Contribution Button Text (EN)", "type": "text", "required": false },
+        { "name": "note", "label": "Note (below the button)", "type": "textarea", "required": false },
+        { "name": "note_en", "label": "Note (EN)", "type": "textarea", "required": false }
       ]
     },
     {
@@ -112,13 +122,16 @@
           "type": "list-of-objects",
           "fields": [
             { "name": "title", "label": "Heading", "type": "text", "required": true },
+            { "name": "title_en", "label": "Heading (EN)", "type": "text", "required": false },
             { "name": "year", "label": "Year", "type": "text", "required": true },
             { "name": "month", "label": "Month", "type": "text", "required": false },
             { "name": "day", "label": "Day", "type": "text", "required": false },
             { "name": "date_note", "label": "Date Note (shown instead of the date)", "type": "text", "required": false },
+            { "name": "date_note_en", "label": "Date Note (EN)", "type": "text", "required": false },
             { "name": "photos", "label": "Photos", "type": "image-list", "required": false },
             { "name": "link", "label": "Link", "type": "text", "required": false },
-            { "name": "description", "label": "Description", "type": "textarea", "required": false }
+            { "name": "description", "label": "Description", "type": "textarea", "required": false },
+            { "name": "description_en", "label": "Description (EN)", "type": "textarea", "required": false }
           ]
         }
       ]

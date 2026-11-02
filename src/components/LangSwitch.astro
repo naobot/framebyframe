@@ -1,0 +1,37 @@
+---
+import { counterpartPath, getLang } from '../i18n';
+
+const lang = getLang(Astro.url);
+const other = counterpartPath(Astro.url);
+---
+
+<div class="lang-switch">
+  {lang === 'ja' ? (
+    <span class="active" aria-current="true">JP</span>
+  ) : (
+    <a href={other} hreflang="ja">JP</a>
+  )}
+  <span class="divider" aria-hidden="true">/</span>
+  {lang === 'en' ? (
+    <span class="active" aria-current="true">EN</span>
+  ) : (
+    <a href={other} hreflang="en">EN</a>
+  )}
+</div>
+
+<style>
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 300;
+  }
+
+  .lang-switch .active {
+    font-weight: 800;
+  }
+
+  .lang-switch .divider {
+    font-weight: 300;
+  }
+</style>

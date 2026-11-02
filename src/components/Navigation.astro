@@ -1,10 +1,13 @@
 ---
 import navData from '../data/navigation.json';
+import { getLang, localePath, t } from '../i18n';
+
+const lang = getLang(Astro.url);
 ---
 
 <nav class="nav-popover">
-  {navData.items.map((item: { name: string; link: string }) => (
-    <a href={item.link}>{item.name}</a>
+  {navData.items.map((item: { name: string; name_en?: string; link: string }) => (
+    <a href={localePath(lang, item.link)}>{t(item, 'name', lang)}</a>
   ))}
 </nav>
 

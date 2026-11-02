@@ -1,0 +1,109 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ActionButton from '../../../components/ActionButton.astro';
+import contributeData from '../../../data/contribute.json';
+import { getLang, localePaths, t } from '../../../i18n';
+import { marked } from 'marked';
+
+export const getStaticPaths = localePaths;
+
+const lang = getLang(Astro.url);
+
+const title = t(contributeData, 'title', lang);
+const subtitle = t(contributeData, 'subtitle', lang);
+const description = t(contributeData, 'description', lang);
+const buttonLabel = t(contributeData, 'contribution_button', lang);
+const note = t(contributeData, 'note', lang);
+
+const descriptionHtml = description ? marked.parse(description) : null;
+---
+
+<Layout title={title}>
+  <div class="contributions-page">
+    <div id="page-content">
+      <div class="wrapper">
+        {title && <h1 class="heading">{ title }</h1>}
+        {subtitle && <h2 class="subheading">{ subtitle }</h2>}
+
+        <div class="sections">
+          <section class="contribute-section">
+            {descriptionHtml && (
+              <div class="text" set:html={descriptionHtml} />
+            )}
+
+            {contributeData.contribution_link && buttonLabel && (
+              <div class="contribute-link">
+                <ActionButton>
+                  <a href={contributeData.contribution_link}>{ buttonLabel }</a>
+                </ActionButton>
+              </div>
+            )}
+
+            {note && <div>{ note }</div>}
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  #page-content {
+    margin: 180px 0 0 0;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2rem;
+    align-items: center;
+  }
+
+  .sections {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 20px auto;
+  }
+
+  section {
+    background: white;
+    width: 90vw;
+    max-width: 600px;
+    padding: 2rem;
+
+    h1:not(.heading) {
+      font-weight: 800;
+      font-size: 1.4em;
+      margin-bottom: 8px;
+    }
+
+    h3:not(.subheading) {
+      font-weight: 800;
+      font-size: 1em;
+      margin-top: 0;
+      color: #797979ff;
+    }
+
+    p {
+      white-space: pre-wrap;
+    }
+  }
+
+  h1, h2, h3 {
+    text-align: center;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 1em;
+    font-weight: 800;
+  }
+
+  .contribute-link {
+    text-align: center;
+    margin: 20px 0;
+  }
+</style>
