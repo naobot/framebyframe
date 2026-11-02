@@ -21,6 +21,64 @@ sample_pages:
   - image: /assets/uploads/vol2_コミック_4.png
   - image: /assets/uploads/vol2_コミック_5.png
 buy_link: 'https://fbfkomaokuri.base.shop/items/143642417'
+description_en: >-
+  The Anime Industry and Feminism 2
+
+
+  Connecting, Linking, and Continuing
+
+
+  B6 size / 164 pages / ¥1500
+
+
+  Includes a bookmark made from the same paper as the cover.
+
+
+  The text uses recycled paper containing over 70% recycled pulp.
+
+
+  Manga
+
+
+  ・Introduction to the Manga (Panel-by-Panel) 2
+
+
+  Epoko Inami (Artwork)
+
+
+  Interview
+
+
+  \[Feature\] Interviews with Mid-Career Women in the Anime Industry: What
+  They've Done in the Field of Expression and Work
+
+
+  Essay
+
+
+  ・Feminism, Expression, and Me Pon (Former Production Assistant)
+
+
+  ・Personal Story Saba (Production Assistant) Torn Apart, a Hundred Joys and a
+  Hundred Sorrows Komakusa (Producer)
+
+
+  ・The Day I Carried an Umbrella: Work and Ethics Yuki Sato (Background Art)
+
+
+  ・Our Small Jobs That Don't Go Well Okonomiyaki (Artwork)
+
+
+  ・There Were Female Heroes! Penguin (Direction/Artwork)
+
+
+  ・May I Continue to Change U-mi (Setting Design)
+
+
+  Feature
+
+
+  ・Everyone's Action Tips
 ---
 # 特集
 
