@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "title": "Vol.3 制作中です",
+      "title": "Vol.3 発売予定",
       "year": "2027",
       "month": "03",
       "date_note": "2027年春頃",
@@ -37,6 +37,18 @@
       "year": "2025",
       "month": "05",
       "day": "18"
+    },
+    {
+      "title": "vol.4発売予定",
+      "year": "2027",
+      "month": "12",
+      "date_note": "2027年秋〜冬頃"
+    },
+    {
+      "title": "vol.5発売予定",
+      "year": "2028",
+      "month": "4",
+      "date_note": "2028年春頃"
     }
   ]
 }
