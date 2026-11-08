@@ -4,6 +4,7 @@ import ActionButton from '../../../components/ActionButton.astro';
 import { getCollection, render } from 'astro:content';
 import { getLang, localePaths, t } from '../../../i18n';
 import { ui } from '../../../i18n/ui';
+import { marked } from 'marked';
 
 export const getStaticPaths = localePaths;
 
@@ -28,6 +29,10 @@ const issuesWithContent = await Promise.all(
         <div class="issues-list">
           {issuesWithContent.map(({ issue, Content }) => {
             const issueTitle = t(issue.data, 'title', lang) ?? '';
+            // The CMS calls the markdown body "Page Content". Its EN twin is a
+            // frontmatter field, so render that instead when it's filled in.
+            const bodyEn = lang === 'en' ? issue.data.page_content_en : undefined;
+            const bodyEnHtml = bodyEn ? marked.parse(bodyEn) : null;
 
             return (
             <div class="issue-item">
@@ -64,7 +69,7 @@ const issuesWithContent = await Promise.all(
                   <h2 class="issue-title">{issueTitle}</h2>
                 {/*</a>*/}
                 <div class="issue-description-details">
-                  <Content />
+                  {bodyEnHtml ? <div set:html={bodyEnHtml} /> : <Content />}
                 </div>
                 <div class="issue-sample-pages">
                   {issue.data.sample_pages?.length && issue.data.sample_pages?.length > 0 && (

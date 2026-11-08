@@ -18,7 +18,8 @@
         { "name": "sample_pages", "label": "Sample Pages", "type": "image-list", "required": false },
         { "name": "buy_link", "label": "Buy Link", "type": "text", "required": false },
         { "name": "description", "label": "Description", "type": "rich-text", "required": false },
-        { "name": "description_en", "label": "Description (EN)", "type": "rich-text", "required": false }
+        { "name": "description_en", "label": "Description (EN)", "type": "rich-text", "required": false },
+        { "name": "page_content_en", "label": "Page Content (EN)", "type": "rich-text", "required": false }
       ]
     }
   ],

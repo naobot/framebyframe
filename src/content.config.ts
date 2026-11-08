@@ -14,6 +14,7 @@ const issues = defineCollection({
     buy_link: z.string().optional(),
     description: z.string().optional(),
     description_en: z.string().optional(),
+    page_content_en: z.string().optional(),
     order: z.number().optional(),
     published: z.boolean().optional(),
   }),
