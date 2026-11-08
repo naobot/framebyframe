@@ -1,0 +1,33 @@
+---
+const LAUNCH_YEAR = 2025;
+const currentYear = new Date().getFullYear();
+const years = currentYear > LAUNCH_YEAR ? `${LAUNCH_YEAR}–${currentYear}` : `${LAUNCH_YEAR}`;
+---
+
+<footer id="site-footer">
+  <p class="copyright">© {years} コマ送り / Frame by Frame</p>
+  <p class="credit">
+    <a href="https://nnao.world/" target="_blank" rel="noopener">Site by nnao.world</a>
+  </p>
+</footer>
+
+<style>
+  #site-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 3rem 2rem 2rem;
+    font-size: 0.8rem;
+    color: #797979ff;
+  }
+
+  #site-footer p {
+    margin: 0;
+  }
+
+  #site-footer a {
+    color: inherit;
+    text-decoration: underline;
+  }
+</style>

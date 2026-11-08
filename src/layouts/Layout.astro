@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import { counterpartPath, getLang } from '../i18n';
 import '../styles/styles.scss';
 
@@ -42,5 +43,6 @@ const other = counterpartPath(Astro.url);
 				<slot />
 			</main>
 		</div>
+		<Footer />
 	</body>
 </html>
