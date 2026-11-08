@@ -63,13 +63,9 @@ const past = keyed
 ---
 
 <section id="news">
-  <div>
-    <h2>{ui('newsHeading', lang)}</h2>
-  </div>
-
   {upcoming.length > 0 && (
     <div class="news-group" id="news-upcoming">
-      <h3>{ui('newsUpcoming', lang)}</h3>
+      <h2 class="group-heading">{ui('newsUpcoming', lang)}</h2>
 
       {upcoming.map(({ item, key }) => (
         <NewsRow
@@ -83,7 +79,13 @@ const past = keyed
     </div>
   )}
 
+  <hr class="news-divider" id="news-divider" hidden={upcoming.length === 0 || past.length === 0} />
+
   <div class="news-group" id="news-past">
+    <h2 class="group-heading" id="news-past-heading" hidden={past.length === 0}>
+      {ui('newsHeading', lang)}
+    </h2>
+
     {past.map(({ item, key }) => (
       <NewsRow
         date={formatDate(item)}
@@ -128,9 +130,13 @@ const past = keyed
       }
     }
 
-    if (!upcomingGroup.querySelector('.news-row')) {
-      upcomingGroup.hidden = true;
-    }
+    // Keep the group headings and the divider in step with what's left.
+    const hasUpcoming = Boolean(upcomingGroup.querySelector('.news-row'));
+    const hasPast = Boolean(pastGroup.querySelector('.news-row'));
+
+    upcomingGroup.hidden = !hasUpcoming;
+    document.getElementById('news-past-heading')!.hidden = !hasPast;
+    document.getElementById('news-divider')!.hidden = !(hasUpcoming && hasPast);
   }
 </script>
 
@@ -140,11 +146,19 @@ const past = keyed
     flex-direction: column;
     padding: 1rem 2rem;
 
-    .news-group h3 {
+    .group-heading {
       margin: 0.5rem 0 0 0;
-      font-size: 0.9em;
-      font-weight: 800;
-      color: #797979ff;
+    }
+
+    .news-divider {
+      border: none;
+      border-top: 1px solid #000;
+      margin: 0.5rem 0 0 0;
+      width: 100%;
+    }
+
+    .news-divider[hidden] {
+      display: none;
     }
   }
 </style>
