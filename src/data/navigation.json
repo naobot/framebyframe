@@ -4,6 +4,7 @@
     { "name": "News", "link": "/#news" },
     { "name": "About", "link": "/about" },
     { "name": "Shops", "link": "/shops" },
+    { "name": "Online Store", "link": "https://fbfkomaokuri.base.shop" },
     { "name": "Contact", "link": "/contact" },
     { "name": "Contributions", "link": "/contributions" }
   ]
