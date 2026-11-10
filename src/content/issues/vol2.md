@@ -2,7 +2,7 @@
 published: true
 title: アニメ業界とフェミニズム Vol.2
 description: |-
-  アニメ業界とフェミニズム2  
+  **アニメ業界とフェミニズム②**  
   連なる、つながる、つづいていく
 cover: /assets/uploads/イラスト7.png
 photos:
