@@ -1,7 +1,7 @@
 ---
 published: true
 title: アニメ業界とフェミニズム Vol.2
-description: '**アニメ業界とフェミニズム②**'
+description: 連なる、つながる、つづいていく
 cover: /assets/uploads/イラスト7.png
 photos:
   - image: /assets/uploads/イラスト3.png
@@ -13,7 +13,7 @@ sample_pages:
   - image: /assets/uploads/vol2_コミック_4.png
   - image: /assets/uploads/vol2_コミック_5.png
 buy_link: 'https://fbfkomaokuri.base.shop/items/143642417'
-description_en: The Anime Industry and Feminism 2
+description_en: 'Connecting, Linking, and Continuing'
 page_content_en: >-
   Connecting, Linking, and Continuing
 
