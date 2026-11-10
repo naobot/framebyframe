@@ -4,12 +4,6 @@ title: アニメ業界とフェミニズム Vol.2
 description: |-
   アニメ業界とフェミニズム2  
   連なる、つながる、つづいていく
-
-    
-  B6/本文164P/￥1500  
-    
-  表紙と同じ紙を使用したしおり付き。  
-  本文には、古紙パルプを70％以上配合した再生紙を使用しています。
 cover: /assets/uploads/イラスト7.png
 photos:
   - image: /assets/uploads/イラスト3.png
@@ -21,22 +15,11 @@ sample_pages:
   - image: /assets/uploads/vol2_コミック_4.png
   - image: /assets/uploads/vol2_コミック_5.png
 buy_link: 'https://fbfkomaokuri.base.shop/items/143642417'
-description_en: >-
+description_en: |-
   The Anime Industry and Feminism 2
 
-
   Connecting, Linking, and Continuing
-
-
-  B6 size / 164 pages / ¥1500
-
-
-  Includes a bookmark made from the same paper as the cover.
-
-
-  The text uses recycled paper containing over 70% recycled pulp.
-
-
+page_content_en: >-
   Manga
 
 
@@ -80,7 +63,12 @@ description_en: >-
 
   ・Everyone's Action Tips
 ---
-# 特集
+B6/本文164P/￥1500
+
+表紙と同じ紙を使用したしおり付き。  
+本文には、古紙パルプを70％以上配合した再生紙を使用しています。
+
+## 内容
 
 ## まんが
 
