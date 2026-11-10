@@ -12,7 +12,7 @@
       "fields": [
         { "name": "title", "label": "Title", "type": "text", "required": true },
         { "name": "title_en", "label": "Title (EN)", "type": "text", "required": false },
-        { "name": "publish_date", "label": "Publish Date", "type": "text", "required": false },
+        { "name": "publish_date", "label": "Publish Date", "type": "datetime", "required": false },
         { "name": "cover", "label": "Cover Photo", "type": "image", "required": false },
         { "name": "photos", "label": "Additional Photos", "type": "image-list", "required": false },
         { "name": "sample_pages", "label": "Sample Pages", "type": "image-list", "required": false },

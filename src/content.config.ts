@@ -7,7 +7,7 @@ const issues = defineCollection({
   schema: z.object({
     title: z.string(),
     title_en: z.string().optional(),
-    publish_date: z.date().optional(),
+    publish_date: z.coerce.date().optional(),
     cover: z.string().optional(),
     photos: z.array(z.object({ image: z.string() })).optional(),
     sample_pages: z.array(z.object({ image: z.string() })).optional(),
