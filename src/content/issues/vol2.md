@@ -66,6 +66,8 @@ page_content_en: >-
 
 
   ・Everyone's Action Tips
+title_en: The Anime Industry and Feminism Vol. 2
+publish_date: 2026/05/04
 ---
 B6/本文164P/￥1500
 
