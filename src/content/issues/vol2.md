@@ -15,9 +15,6 @@ sample_pages:
 buy_link: 'https://fbfkomaokuri.base.shop/items/143642417'
 description_en: 'Connecting, Linking, and Continuing'
 page_content_en: >-
-  Connecting, Linking, and Continuing
-
-
   B6 size / 164 pages / ¥1500
 
 
@@ -70,8 +67,6 @@ page_content_en: >-
 
   ・Everyone's Action Tips
 ---
-連なる、つながる、つづいていく
-
 B6/本文164P/￥1500
 
 表紙と同じ紙を使用したしおり付き。  
