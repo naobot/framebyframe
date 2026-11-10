@@ -1,9 +1,7 @@
 ---
 published: true
 title: アニメ業界とフェミニズム Vol.2
-description: |-
-  **アニメ業界とフェミニズム②**  
-  連なる、つながる、つづいていく
+description: '**アニメ業界とフェミニズム②**'
 cover: /assets/uploads/イラスト7.png
 photos:
   - image: /assets/uploads/イラスト3.png
@@ -15,12 +13,21 @@ sample_pages:
   - image: /assets/uploads/vol2_コミック_4.png
   - image: /assets/uploads/vol2_コミック_5.png
 buy_link: 'https://fbfkomaokuri.base.shop/items/143642417'
-description_en: |-
-  The Anime Industry and Feminism 2
-
-  Connecting, Linking, and Continuing
+description_en: The Anime Industry and Feminism 2
 page_content_en: >-
-  Manga
+  Connecting, Linking, and Continuing
+
+
+  B6 size / 164 pages / ¥1500
+
+
+  Includes a bookmark made from the same paper as the cover.
+
+
+  The text uses recycled paper containing over 70% recycled pulp.
+
+
+  **Manga**
 
 
   ・Introduction to the Manga (Panel-by-Panel) 2
@@ -29,14 +36,14 @@ page_content_en: >-
   Epoko Inami (Artwork)
 
 
-  Interview
+  **Interview**
 
 
   \[Feature\] Interviews with Mid-Career Women in the Anime Industry: What
   They've Done in the Field of Expression and Work
 
 
-  Essay
+  **Essay**
 
 
   ・Feminism, Expression, and Me Pon (Former Production Assistant)
@@ -58,11 +65,13 @@ page_content_en: >-
   ・May I Continue to Change U-mi (Setting Design)
 
 
-  Feature
+  **Feature**
 
 
   ・Everyone's Action Tips
 ---
+連なる、つながる、つづいていく
+
 B6/本文164P/￥1500
 
 表紙と同じ紙を使用したしおり付き。  
